@@ -1,0 +1,50 @@
+[
+  [
+    "c1867f3a-d026-4499-a9a0-6dd868b9c3d1",
+    {
+      "deviceId": "c1867f3a-d026-4499-a9a0-6dd868b9c3d1",
+      "deviceName": "Test Phone",
+      "deviceType": "android",
+      "osVersion": "13.0",
+      "appVersion": "1.0.0",
+      "createdAt": "2026-03-15T14:06:53.373Z",
+      "lastActiveAt": "2026-03-15T14:06:53.373Z"
+    }
+  ],
+  [
+    "4a0a1ff8-426d-4cd4-b2f8-16e1727e21ea",
+    {
+      "deviceId": "4a0a1ff8-426d-4cd4-b2f8-16e1727e21ea",
+      "deviceName": "Test Phone",
+      "deviceType": "android",
+      "osVersion": "13.0",
+      "appVersion": "1.0.0",
+      "createdAt": "2026-03-15T14:06:53.746Z",
+      "lastActiveAt": "2026-03-15T14:06:53.758Z"
+    }
+  ],
+  [
+    "77c79e70-623e-4577-9226-6338eaee598c",
+    {
+      "deviceId": "77c79e70-623e-4577-9226-6338eaee598c",
+      "deviceName": "Test Phone",
+      "deviceType": "android",
+      "osVersion": "13.0",
+      "appVersion": "1.0.0",
+      "createdAt": "2026-03-15T14:06:53.785Z",
+      "lastActiveAt": "2026-03-15T14:06:53.785Z"
+    }
+  ],
+  [
+    "8dd18a2c-adf5-476a-ac04-f7f25b6fb1d3",
+    {
+      "deviceId": "8dd18a2c-adf5-476a-ac04-f7f25b6fb1d3",
+      "deviceName": "Test Phone",
+      "deviceType": "android",
+      "osVersion": "13.0",
+      "appVersion": "1.0.0",
+      "createdAt": "2026-03-15T14:06:53.811Z",
+      "lastActiveAt": "2026-03-15T14:06:53.811Z"
+    }
+  ]
+]
