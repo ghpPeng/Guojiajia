@@ -6,6 +6,52 @@
 
 ---
 
+> ## 🤖 AI-Generated Project · AI 全程编写
+>
+> **This project was entirely written by AI agents. No human wrote any code.**
+>
+> **本项目代码全部由 AI 完成编写，无人工编码。**
+>
+> ### AI Contributors · AI 贡献者
+>
+> | Tool | Role |
+> |------|------|
+> | **Toyleader (OpenClaw Agent)** | Project orchestration · 项目编排 |
+> | **Claude Code (Anthropic)** | Code generation & implementation · 代码生成与实现 |
+> | **ECC (Everything Claude Code)** | Skill library & workflows · 技能库与工作流 |
+>
+> ### ECC Skills Used · 使用的 ECC 技能
+>
+> | Skill | Purpose · 用途 |
+> |-------|---------------|
+> | `planner` | Project planning · 项目规划 |
+> | `tdd-workflow` | Test-driven development · 测试驱动开发 |
+> | `backend-patterns` | Backend architecture · 后端开发 |
+> | `frontend-patterns` | Frontend development · 前端开发 |
+> | `api-design` | REST API design · API 设计 |
+> | `e2e-testing` | End-to-end testing · 端到端测试 |
+> | `verification-loop` | Quality verification · 验证循环 |
+> | `security-review` | Security analysis · 安全审查 |
+> | `deployment-patterns` | Deployment workflows · 部署模式 |
+> | `code-reviewer` | Code review · 代码审查 |
+>
+> ### Project Stats · 项目统计
+>
+> | Metric | Value |
+> |--------|-------|
+> | Source files (TS/TSX/JS) | 61 TypeScript + 15 JavaScript |
+> | Total lines of code | ~4,800 |
+> | Test files | 15 |
+> | Test cases | 55+ |
+> | Test pass rate | 100% |
+> | Functional modules | 5 (HTTP Proxy, Admin Dashboard, Device Client, Mock Gateway, Web Interface) |
+> | API endpoints | 12+ |
+> | Services | 3 (Device, JWT, Device Storage) |
+
+---
+
+---
+
 ## 中文
 
 ### 什么是「过家家」？
