@@ -11,15 +11,19 @@ export class JWTService {
     this.expiresIn = appConfig.jwt.expiresIn;
   }
 
+  private getSecret(): string {
+    return process.env.JWT_SECRET || this.secret;
+  }
+
   generateToken(payload: JWTPayload): string {
-    return jwt.sign(payload, this.secret, {
+    return jwt.sign(payload, this.getSecret(), {
       expiresIn: this.expiresIn,
     } as jwt.SignOptions);
   }
 
   verifyToken(token: string): JWTPayload {
     try {
-      const decoded = jwt.verify(token, this.secret) as JWTPayload;
+      const decoded = jwt.verify(token, this.getSecret()) as JWTPayload;
       return decoded;
     } catch (error) {
       throw new Error('Invalid token');

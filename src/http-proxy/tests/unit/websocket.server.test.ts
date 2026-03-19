@@ -12,13 +12,13 @@ describe('WebSocketServer', () => {
   let token: string;
   let deviceId: string;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     server = createServer();
     jwtService = new JWTService();
     deviceService = new DeviceService();
 
     // Register a device
-    const device = deviceService.registerDevice({
+    const device = await deviceService.registerDevice({
       deviceName: 'Test Device',
       deviceType: 'android',
       osVersion: '13.0',

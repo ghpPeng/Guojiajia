@@ -1,0 +1,15 @@
+node_modules
+npm-debug.log
+dist
+coverage
+tests
+*.test.ts
+.env
+.env.test
+logs
+data
+demo
+.git
+.gitignore
+README.md
+DEPLOYMENT-E2E-PLAN.md

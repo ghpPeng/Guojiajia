@@ -8,7 +8,7 @@ describe('DeviceService', () => {
   });
 
   describe('registerDevice', () => {
-    it('should register a new device', () => {
+    it('should register a new device', async () => {
       const deviceData = {
         deviceName: 'Test Phone',
         deviceType: 'android' as const,
@@ -16,7 +16,7 @@ describe('DeviceService', () => {
         appVersion: '1.0.0',
       };
 
-      const device = deviceService.registerDevice(deviceData);
+      const device = await deviceService.registerDevice(deviceData);
 
       expect(device).toBeDefined();
       expect(device.deviceId).toBeDefined();
@@ -28,7 +28,7 @@ describe('DeviceService', () => {
       expect(device.lastActiveAt).toBeInstanceOf(Date);
     });
 
-    it('should generate unique device IDs', () => {
+    it('should generate unique device IDs', async () => {
       const deviceData = {
         deviceName: 'Test Phone',
         deviceType: 'android' as const,
@@ -36,15 +36,15 @@ describe('DeviceService', () => {
         appVersion: '1.0.0',
       };
 
-      const device1 = deviceService.registerDevice(deviceData);
-      const device2 = deviceService.registerDevice(deviceData);
+      const device1 = await deviceService.registerDevice(deviceData);
+      const device2 = await deviceService.registerDevice(deviceData);
 
       expect(device1.deviceId).not.toBe(device2.deviceId);
     });
   });
 
   describe('getDevice', () => {
-    it('should retrieve an existing device', () => {
+    it('should retrieve an existing device', async () => {
       const deviceData = {
         deviceName: 'Test Phone',
         deviceType: 'android' as const,
@@ -52,7 +52,7 @@ describe('DeviceService', () => {
         appVersion: '1.0.0',
       };
 
-      const registered = deviceService.registerDevice(deviceData);
+      const registered = await deviceService.registerDevice(deviceData);
       const retrieved = deviceService.getDevice(registered.deviceId);
 
       expect(retrieved).toBeDefined();
@@ -62,56 +62,45 @@ describe('DeviceService', () => {
 
     it('should return null for non-existent device', () => {
       const device = deviceService.getDevice('non-existent-id');
-
       expect(device).toBeNull();
     });
   });
 
   describe('updateLastActive', () => {
-    it('should update device last active timestamp', (done) => {
-      const deviceData = {
+    it('should update device last active timestamp', async () => {
+      const device = await deviceService.registerDevice({
         deviceName: 'Test Phone',
         deviceType: 'android' as const,
         osVersion: '13.0',
         appVersion: '1.0.0',
-      };
-
-      const device = deviceService.registerDevice(deviceData);
+      });
       const originalLastActive = device.lastActiveAt;
 
-      // Wait a bit to ensure timestamp difference
-      setTimeout(() => {
-        deviceService.updateLastActive(device.deviceId);
-        const updated = deviceService.getDevice(device.deviceId);
+      await new Promise(resolve => setTimeout(resolve, 10));
+      await deviceService.updateLastActive(device.deviceId);
+      const updated = deviceService.getDevice(device.deviceId);
 
-        expect(updated).toBeDefined();
-        expect(updated).not.toBeNull();
-        if (updated) {
-          expect(updated.lastActiveAt.getTime()).toBeGreaterThan(
-            originalLastActive.getTime()
-          );
-        }
-        done();
-      }, 10);
+      expect(updated).toBeDefined();
+      if (updated) {
+        expect(updated.lastActiveAt.getTime()).toBeGreaterThan(originalLastActive.getTime());
+      }
     });
 
-    it('should not throw error for non-existent device', () => {
-      expect(() => {
-        deviceService.updateLastActive('non-existent-id');
-      }).not.toThrow();
+    it('should not throw error for non-existent device', async () => {
+      await expect(deviceService.updateLastActive('non-existent-id')).resolves.not.toThrow();
     });
   });
 
   describe('getAllDevices', () => {
-    it('should return all registered devices', () => {
-      const device1 = deviceService.registerDevice({
+    it('should return all registered devices', async () => {
+      const device1 = await deviceService.registerDevice({
         deviceName: 'Phone 1',
         deviceType: 'android',
         osVersion: '13.0',
         appVersion: '1.0.0',
       });
 
-      const device2 = deviceService.registerDevice({
+      const device2 = await deviceService.registerDevice({
         deviceName: 'Phone 2',
         deviceType: 'ios',
         osVersion: '16.0',
@@ -127,7 +116,6 @@ describe('DeviceService', () => {
 
     it('should return empty array when no devices registered', () => {
       const devices = deviceService.getAllDevices();
-
       expect(devices).toEqual([]);
     });
   });

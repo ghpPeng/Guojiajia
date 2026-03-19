@@ -6,14 +6,23 @@ export class DeviceService {
   private devices: Map<string, Device>;
   private storage: DeviceStorageService;
 
+  private ready: Promise<void>;
+
   constructor(storageDir?: string) {
     this.devices = new Map();
     this.storage = new DeviceStorageService(storageDir);
-    this.loadDevices();
+    this.ready = this.storage.loadDevices().then(devices => {
+      // Merge loaded devices, keeping any already registered in-memory
+      devices.forEach((device, id) => {
+        if (!this.devices.has(id)) {
+          this.devices.set(id, device);
+        }
+      });
+    }).catch(() => {});
   }
 
-  private async loadDevices(): Promise<void> {
-    this.devices = await this.storage.loadDevices();
+  async waitReady(): Promise<void> {
+    return this.ready;
   }
 
   private async persist(): Promise<void> {

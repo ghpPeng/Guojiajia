@@ -4,7 +4,8 @@ import { Stats } from '../types'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
 export default function Dashboard() {
-  const { data: stats } = useSWR<Stats>('/api/stats', api.get)
+  const { data: statsRes } = useSWR('/admin/stats', api.get)
+  const stats: Stats | undefined = statsRes?.data
 
   const chartData = [
     { name: 'Total', value: stats?.totalDevices || 0 },

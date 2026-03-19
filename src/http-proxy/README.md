@@ -66,6 +66,15 @@ npm run test:unit
 # 运行集成测试
 npm run test:integration
 
+# 运行 E2E 测试
+npm run test:e2e
+
+# 运行 E2E 测试（带覆盖率）
+npm run test:e2e:coverage
+
+# 运行 E2E 测试（Docker 环境）
+npm run test:e2e:docker
+
 # 监听模式
 npm run test:watch
 ```
@@ -151,9 +160,28 @@ src/
 tests/
 ├── unit/             # 单元测试
 ├── integration/      # 集成测试
+├── e2e/              # 端到端测试
+│   ├── helpers/      # E2E 测试辅助工具
+│   ├── 01-device-registration.test.ts
+│   ├── 02-websocket-connection.test.ts
+│   ├── 03-message-forwarding.test.ts
+│   ├── 04-error-handling.test.ts
+│   └── 05-full-integration.test.ts
 ├── helpers/          # 测试辅助
 └── setup.ts          # 测试配置
 ```
+
+## E2E 测试
+
+端到端测试覆盖完整的用户流程：
+
+- 设备注册流程
+- WebSocket 连接认证
+- 消息转发（客户端 → 代理 → 网关）
+- 错误处理和恢复
+- 完整集成测试
+
+详细测试报告：[docs/E2E-TEST-REPORT.md](docs/E2E-TEST-REPORT.md)
 
 ## 测试覆盖率
 
@@ -188,12 +216,35 @@ tests/
 
 ## 部署
 
-### Docker 部署（待实现）
+### Docker 部署（推荐）
+
+使用 Docker Compose 一键启动：
+
+```bash
+# 启动服务（HTTP Proxy + Mock Gateway）
+docker-compose up -d
+
+# 查看服务状态
+docker-compose ps
+
+# 查看日志
+docker-compose logs -f
+
+# 停止服务
+docker-compose down
+```
+
+手动 Docker 部署：
 
 ```bash
 docker build -t guojiajia-http-proxy .
-docker run -p 3000:3000 --env-file .env guojiajia-http-proxy
+docker run -d -p 3000:3000 \
+  -e JWT_SECRET=your-secret \
+  -e GATEWAY_WS_URL=ws://gateway:8080 \
+  guojiajia-http-proxy
 ```
+
+详细部署文档：[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
 
 ### PM2 部署
 

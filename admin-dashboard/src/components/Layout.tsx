@@ -1,7 +1,8 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation()
+  const navigate = useNavigate()
 
   const links = [
     { path: '/', label: 'Dashboard' },
@@ -10,6 +11,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { path: '/logs', label: 'Logs' },
     { path: '/tests', label: 'Tests' }
   ]
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    navigate('/login')
+  }
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -30,6 +36,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 {link.label}
               </Link>
             ))}
+            <button
+              onClick={handleLogout}
+              className="ml-auto px-3 py-2 rounded text-gray-700 hover:bg-gray-100"
+            >
+              Logout
+            </button>
           </div>
         </div>
       </nav>

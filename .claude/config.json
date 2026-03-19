@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "project": {
+    "name": "Guojiajia",
+    "description": "AI-driven development system"
+  },
+  "hooks": {
+    "postToolUse": ".claude/hooks/post-tool-use.js"
+  }
+}

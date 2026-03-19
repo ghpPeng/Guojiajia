@@ -23,8 +23,8 @@ describe('authMiddleware', () => {
     deviceService = new DeviceService();
   });
 
-  it('should pass with valid token', () => {
-    const device = deviceService.registerDevice({
+  it('should pass with valid token', async () => {
+    const device = await deviceService.registerDevice({
       deviceName: 'Test Device',
       deviceType: 'android',
       osVersion: '13.0',
